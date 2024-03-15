@@ -5,7 +5,7 @@ public class BadDurationException extends Exception{
         super(message);
     }
     public BadDurationException (){
-        super("Bad Duration");
+        super("Bad Duration chosen");
     }
 
 }
