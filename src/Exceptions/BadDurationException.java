@@ -1,7 +1,7 @@
 package Exceptions;
 
 /**
- * Exception for when a bad duration is chosen
+ * Exception for  bad duration
 
  */
 public class BadDurationException extends Exception{
@@ -17,7 +17,7 @@ public class BadDurationException extends Exception{
      * Constructor for BadDurationException
      */
     public BadDurationException (){
-        super("Bad Duration chosen");
+        super("Bad Duration");
     }
 
 }
