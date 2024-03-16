@@ -25,7 +25,7 @@ public class Part2 {
 
             }
 
-            // Serialize the movies array to a binary file
+            // Serialize the movies array
             FileOutputStream manifestSerrialized=new FileOutputStream(genreFile.replace(".csv", ".ser"));
             ObjectOutputStream out=new ObjectOutputStream(manifestSerrialized);
      }
