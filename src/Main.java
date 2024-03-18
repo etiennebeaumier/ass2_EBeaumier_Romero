@@ -3,5 +3,7 @@
 public class Main {
     public static void main(String[] args) {
 
+        String part1_manifest = "part1_manifest.txt";
+        String part2_manifest = Part1.do_part1(part1_manifest);
     }
 }
