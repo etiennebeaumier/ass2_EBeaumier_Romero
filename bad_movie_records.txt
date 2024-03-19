@@ -1,0 +1,8 @@
+Syntax Error: Bad genre in file: Movies1990.csv at line: 4
+Syntax Error: Bad year in file: Movies1991.csv at line: 10
+Syntax Error: Bad year in file: Movies1992.csv at line: 21
+Syntax Error: Bad Duration in file: Movies1993.csv at line: 7
+Syntax Error: Bad name in file: Movies1994.csv at line: 1
+Syntax Error: Bad genre in file: Movies1996.csv at line: 9
+Syntax Error: Missing fields in file: Movies1997.csv at line: 27
+Syntax Error: Bad name in file: Movies1999.csv at line: 13
