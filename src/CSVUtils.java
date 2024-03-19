@@ -44,7 +44,7 @@ public class CSVUtils {
      * @return An array of strings containing the parts of the line.
      */
     public static String[] splitByCommas(String line) {
-        String[] parts = new String[10];
+        String[] parts = new String[11];
         int index = 0;
         int start = 0;
         boolean inQuotes = false;

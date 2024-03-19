@@ -61,8 +61,7 @@ public class Part1 {
            String line = part1_manifest.nextLine();
            int lineNumber = 0;
            try {
-               Scanner lineScanner = new Scanner(new FileInputStream(line));
-               while(lineScanner.hasNext()){
+               Scanner lineScanner = new Scanner(new FileInputStream("resources/" + line));               while(lineScanner.hasNext()){
                      String movie = lineScanner.nextLine();
                      lineNumber++;
                      if(checkValidMovie(movie)){
@@ -325,7 +324,12 @@ public class Part1 {
     public static boolean checkInvalidYear(String line) throws MissingQuotesException, BadYearException {
         String line2 = CSVUtils.removeCommasInsideQuotes(line);
         String[] parts = line2.split(",");
-        if ((Integer.parseInt(parts[0]) < 1990 || Integer.parseInt(parts[0]) > 1999)) {
+        try {
+            int year = Integer.parseInt(parts[0]);
+            if (year < 1990 || year > 1999) {
+                throw new BadYearException();
+            }
+        } catch (NumberFormatException e) {
             throw new BadYearException();
         }
         return false;
