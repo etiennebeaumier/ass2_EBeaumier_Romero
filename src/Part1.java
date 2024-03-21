@@ -15,7 +15,8 @@ import java.util.Scanner;
 public class Part1 {
 
     /**
-     * Processes the given manifest file to partition movie records based on specific criteria.
+     * Processes the given manifest file to partition movie records based on their genre.
+     *If a movie record is invalid, it is written to a file named "bad_movie_records.txt".
      *
      * @param manifest The path to the manifest file listing CSV files to be processed.
      */
@@ -27,6 +28,7 @@ public class Part1 {
                 thriller = null, western = null;
 
         Scanner part1_manifest = null;
+        Scanner lineScanner = null;
 
 
         try {
@@ -52,117 +54,135 @@ public class Part1 {
 
             part1_manifest = new Scanner(new FileInputStream(manifest));
 
-        }
-        catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Error creating output files or couldn't be opened");
-
         }
-       while(part1_manifest.hasNext()) {
-           String line = part1_manifest.nextLine();
-           int lineNumber = 0;
-           try {
-               Scanner lineScanner = new Scanner(new FileInputStream("resources/" + line));               while(lineScanner.hasNext()){
-                     String movie = lineScanner.nextLine();
-                     lineNumber++;
-                     if(checkValidMovie(movie)){
-                          String[] parts = CSVUtils.splitByCommas(movie);
-                          if(parts[3].equals("Musical")){
-                            musical.println(movie);
-                          }
-                          else if(parts[3].equals("Comedy")){
-                            comedy.println(movie);
-                          }
-                          else if(parts[3].equals("Animation")){
-                            animation.println(movie);
-                          }
-                          else if(parts[3].equals("Adventure")){
-                            adventure.println(movie);
-                          }
-                          else if(parts[3].equals("Drama")){
-                            drama.println(movie);
-                          }
-                          else if(parts[3].equals("Crime")){
-                            crime.println(movie);
-                          }
-                          else if(parts[3].equals("Biography")){
-                            biography.println(movie);
-                          }
-                          else if(parts[3].equals("Horror")){
-                            horror.println(movie);
-                          }
-                          else if(parts[3].equals("Action")){
-                            action.println(movie);
-                          }
-                          else if(parts[3].equals("Documentary")){
-                            documentary.println(movie);
-                          }
-                          else if(parts[3].equals("Fantasy")){
-                            fantasy.println(movie);
-                          }
-                          else if(parts[3].equals("Mystery")){
-                            mystery.println(movie);
-                          }
-                          else if(parts[3].equals("Sci-Fi")){
-                            sci_fi.println(movie);
-                          }
-                          else if(parts[3].equals("Family")){
-                            family.println(movie);
-                          }
-                          else if(parts[3].equals("Romance")){
-                            romance.println(movie);
-                          }
-                          else if(parts[3].equals("Thriller")){
-                            thriller.println(movie);
-                          }
-                          else if(parts[3].equals("Western")){
-                            western.println(movie);
-                          }
-                     }
+        while (part1_manifest.hasNext()) {
+            String line = part1_manifest.nextLine();
+            int lineNumber = 0;
+            try {
+                lineScanner = new Scanner(new FileInputStream("resources/" + line));
+            } catch (FileNotFoundException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            while (lineScanner.hasNext()) {
+                String movie = lineScanner.nextLine();
+                lineNumber++;
+                try {
+                    if (checkValidMovie(movie)) {
+                        String[] parts = CSVUtils.splitByCommas(movie);
+                        switch (parts[3]) {
+                            case "Musical":
+                                musical.println(movie);
+                                break;
+                            case "Comedy":
+                                comedy.println(movie);
+                                break;
+                            case "Animation":
+                                animation.println(movie);
+                                break;
+                            case "Adventure":
+                                adventure.println(movie);
+                                break;
+                            case "Drama":
+                                drama.println(movie);
+                                break;
+                            case "Crime":
+                                crime.println(movie);
+                                break;
+                            case "Biography":
+                                biography.println(movie);
+                                break;
+                            case "Horror":
+                                horror.println(movie);
+                                break;
+                            case "Action":
+                                action.println(movie);
+                                break;
+                            case "Documentary":
+                                documentary.println(movie);
+                                break;
+                            case "Fantasy":
+                                fantasy.println(movie);
+                                break;
+                            case "Mystery":
+                                mystery.println(movie);
+                                break;
+                            case "Sci-Fi":
+                                sci_fi.println(movie);
+                                break;
+                            case "Family":
+                                family.println(movie);
+                                break;
+                            case "Romance":
+                                romance.println(movie);
+                                break;
+                            case "Thriller":
+                                thriller.println(movie);
+                                break;
+                            case "Western":
+                                western.println(movie);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
-               }
-           } catch (MissingQuotesException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (ExcessFieldsException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (MissingFieldsException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (BadTitleException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (BadNameException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (BadYearException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (BadDurationException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (BadGenreException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (BadRatingException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (BadScoreException e) {
-               e.setLineNumber(lineNumber);
-               e.setFileName(line);
-               badMovie.println(e.toString());
-           } catch (FileNotFoundException e) {
-               System.out.println("Error: " + e.getMessage());           }
-       }
+
+                } catch (MissingQuotesException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (ExcessFieldsException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (MissingFieldsException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (BadTitleException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (BadNameException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (BadYearException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (BadDurationException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (BadGenreException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (BadRatingException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+                } catch (BadScoreException e) {
+                    badMovie.println(movie);
+                    e.setLineNumber(lineNumber);
+                    e.setFileName(line);
+                    badMovie.println(e.toString()+"\n");
+
+                }
+            }
+        }
         writeToPart2Manifest(part2_manifest);
         part1_manifest.close();
         badMovie.close();
@@ -463,7 +483,12 @@ public class Part1 {
     public static boolean checkInvalidScore(String line) throws MissingQuotesException, BadScoreException {
         String line2 = CSVUtils.removeCommasInsideQuotes(line);
         String[] parts = line2.split(",");
-        if (Double.parseDouble(parts[5]) < 0 || Double.parseDouble(parts[5]) > 10) {
+        try {
+            double score = Double.parseDouble(parts[5]);
+            if (score < 0 || score > 10) {
+                throw new BadScoreException();
+            }
+        } catch (NumberFormatException e) {
             throw new BadScoreException();
         }
         return false;
@@ -471,9 +496,10 @@ public class Part1 {
 
     /**
      * Writes to the part2_manifest file
+     *
      * @param part2_manifest the file to write to
      */
-    public static void writeToPart2Manifest(PrintWriter part2_manifest){
+    public static void writeToPart2Manifest(PrintWriter part2_manifest) {
         part2_manifest.println("musical.csv");
         part2_manifest.println("comedy.csv");
         part2_manifest.println("animation.csv");

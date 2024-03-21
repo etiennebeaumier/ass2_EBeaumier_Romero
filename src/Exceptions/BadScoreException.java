@@ -33,7 +33,7 @@ public class BadScoreException extends Exception{
      */
     @Override
     public String toString() {
-        return "Syntax Error: " + super.getMessage() + " in file: " + fileName + " at line: " + lineNumber;
+        return "Semantic Error: " + super.getMessage() + " in file: " + fileName + " at line: " + lineNumber;
     }
 
     /**
