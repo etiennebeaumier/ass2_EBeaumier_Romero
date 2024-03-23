@@ -1,29 +1,35 @@
 import Exceptions.ExcessFieldsException;
 import Exceptions.MissingFieldsException;
+import Exceptions.MissingQuotesException;
 
 import java.io.*;
+import java.util.Scanner;
+
 public class Part2 {
-    public static void do_part2(String manifestFile) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(manifestFile))){
+    public static String do_part2(String manifestFile) {
+        try (Scanner reader = new Scanner(new FileReader(manifestFile))){
         String genreFile;
-        while ((genreFile=reader.readLine()) !=null){
+        while (reader.hasNextLine()){
+            genreFile=reader.nextLine();
             processGenreFile(genreFile);
         }
         }
         catch (IOException e) {
             System.out.println("Error reading the file: "+ e.getMessage());
         }
+        return "part3_manifest.txt";
     }
 
-    public static void processGenreFile(String genreFile) {
+    public static String processGenreFile(String genreFile) {
         try {
             int recordCount = countRecords(genreFile);
             Movie[] movies = new Movie[recordCount];
 
-            try (BufferedReader reader = new BufferedReader(new FileReader(genreFile))) {
+            try (Scanner reader = new Scanner(new FileReader(genreFile))) {
                 String line;
                 int index = 0;
-                while ((line = reader.readLine()) != null && index < movies.length) {
+                while (reader.hasNextLine() && index < movies.length) {
+                    line=reader.nextLine();
                     movies[index++] = parseMovie(line);
                 }
             }
@@ -36,25 +42,31 @@ public class Part2 {
                 out.writeObject(movies);
             }
             // Now append the binary file name to part3_manifest.txt
-            try (BufferedWriter manifestWriter = new BufferedWriter(new FileWriter("part3_manifest.txt", true))) {
+            try (PrintWriter manifestWriter = new PrintWriter(new FileWriter("part3_manifest.txt", true))) {
                 manifestWriter.write(binaryFileName);
-                manifestWriter.newLine();
             }
-        } catch (IOException | MissingFieldsException | ExcessFieldsException e) {
+        } catch (IOException | MissingFieldsException | ExcessFieldsException | MissingQuotesException e) {
             e.printStackTrace();
         }
+        return "part3_manifest.txt";
     }
 
 
-   private static int countRecords(String fileName) throws IOException {
-        int lines=0;
-       BufferedReader reader = new BufferedReader(new FileReader(fileName));
-           while (reader.readLine() != null) lines++;
-       return lines;
-   }
 
-   private static Movie parseMovie(String csvFile) throws MissingFieldsException, ExcessFieldsException {
-        String[] parts=csvFile.split(",");
+    private static int countRecords(String fileName) throws IOException {
+        int lines = 0;
+        Scanner reader = new Scanner(new FileReader(fileName));
+        while (reader.hasNextLine()) {
+            reader.nextLine(); // This line consumes the next line of the input
+            lines++;
+        }
+        reader.close(); // Always close resources when you're done with them
+        return lines;
+    }
+
+   private static Movie parseMovie(String csvFile) throws MissingFieldsException, ExcessFieldsException, MissingQuotesException {
+        String csvLine=CSVUtils.removeCommasInsideQuotes(csvFile);
+       String[] parts = csvLine.split(",");
         Movie movie=new Movie(Integer.parseInt(parts[0]),
                 parts[1],
                 Integer.parseInt(parts[2]),
