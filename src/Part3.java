@@ -3,32 +3,33 @@ import java.util.Scanner;
 
 public class Part3 {
     public static Movie[][] do_part3(String part3ManifestFile) {
-        Movie[][] allMovies=null;
-        int allMoviesSize=0;
-        try(Scanner manifestScanner=new Scanner(new FileInputStream(part3ManifestFile))){
+        Movie[][] allMovies = null;
+        int allMoviesSize = 0;
+        try (Scanner manifestScanner = new Scanner(new FileInputStream(part3ManifestFile))) {
 
             String genrefile;
-            while ((manifestScanner.hasNextLine())){
+            while ((manifestScanner.hasNextLine())) {
                 manifestScanner.nextLine();
                 allMoviesSize++;
             }
-            allMovies=new Movie[allMoviesSize][];
-// Reset the scanner to the beginning of the file
-            manifestScanner.reset();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        allMovies = new Movie[allMoviesSize][];
 
-            int genreIndex=0;
-            while (manifestScanner.hasNextLine()){
-                String MovieGenreBinaryFile=manifestScanner.nextLine();
-                allMovies[genreIndex]=deserializeMovie(MovieGenreBinaryFile);
+        try (Scanner manifestScanner = new Scanner(new FileInputStream(part3ManifestFile))) {
+            int genreIndex = 0;
+            while (manifestScanner.hasNextLine()) {
+                String MovieGenreBinaryFile = manifestScanner.nextLine();
+                allMovies[genreIndex] = deserializeMovie(MovieGenreBinaryFile);
                 genreIndex++;
             }
 
-        } catch (Exception e) {
-            System.out.println("not yet");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return allMovies;
     }
-
     public static Movie[] deserializeMovie(String MovieGenreBinaryFile) {
 
         Movie[] oneMovieGenre = null;
@@ -43,7 +44,7 @@ public class Part3 {
 
     public static void navigateMovie(Movie[][] allMovies){
         Scanner keyboard=new Scanner(System.in);
-        int currentGenreIndex=0;
+        int currentGenreIndex=4;
         int currentMovieIndex=0;
 
         String userChoice=null;
@@ -52,7 +53,8 @@ public class Part3 {
             System.out.println("Main Menu");
             System.out.println("----------------------------");
             System.out.println("s: Select a movie array to navigate");
-            System.out.println("n: Navigate " + allMovies[currentGenreIndex][currentMovieIndex].getGenres() + " movies (" + allMovies[currentGenreIndex].length + " records)");
+            System.out.println("n: Navigate " + allMovies[currentGenreIndex][currentMovieIndex].getGenres() +
+                    " movies (" + allMovies[currentGenreIndex].length + " records)");
             System.out.println("x: Exit");
             System.out.println("----------------------------");
             System.out.print("Enter Your Choice: ");

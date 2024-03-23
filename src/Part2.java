@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Part2 {
     public static String do_part2(String manifestFile) {
+        clearManifest("part3_manifest.txt");
         try (Scanner reader = new Scanner(new FileReader(manifestFile))){
         String genreFile;
         while (reader.hasNextLine()){
@@ -18,6 +19,14 @@ public class Part2 {
             System.out.println("Error reading the file: "+ e.getMessage());
         }
         return "part3_manifest.txt";
+    }
+    private static void clearManifest(String filename) {
+        try (PrintWriter pw = new PrintWriter(filename)) {
+            // Opening a PrintWriter with just the filename (without 'true' for append mode)
+            // will clear the file without writing anything to it.
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static String processGenreFile(String genreFile) {
@@ -43,7 +52,7 @@ public class Part2 {
             }
             // Now append the binary file name to part3_manifest.txt
             try (PrintWriter manifestWriter = new PrintWriter(new FileWriter("part3_manifest.txt", true))) {
-                manifestWriter.write(binaryFileName);
+                manifestWriter.println(binaryFileName);
             }
         } catch (IOException | MissingFieldsException | ExcessFieldsException | MissingQuotesException e) {
             e.printStackTrace();
