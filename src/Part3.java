@@ -41,112 +41,56 @@ public class Part3 {
         }
         return oneMovieGenre;
     }
+    public static void navigateMovieArray(Movie[] movies, int currentPosition) {
+        Scanner scanner = new Scanner(System.in);
 
-    public static void navigateMovie(Movie[][] allMovies){
-        Scanner keyboard=new Scanner(System.in);
-        int currentGenreIndex=4;
-        int currentMovieIndex=0;
-
-        String userChoice=null;
-        do{
-            System.out.println("----------------------------");
-            System.out.println("Main Menu");
-            System.out.println("----------------------------");
-            System.out.println("s: Select a movie array to navigate");
-            System.out.println("n: Navigate " + allMovies[currentGenreIndex][currentMovieIndex].getGenres() +
-                    " movies (" + allMovies[currentGenreIndex].length + " records)");
-            System.out.println("x: Exit");
-            System.out.println("----------------------------");
-            System.out.print("Enter Your Choice: ");
-            userChoice = keyboard.nextLine();
-
-        switch (userChoice.toLowerCase()){
-
-            case "s":
-                currentGenreIndex = selectGenre(keyboard, allMovies);
-                currentMovieIndex = 0; // Reset index when genre changes
-                break;
-            case "n":
-                currentMovieIndex = navigateGenre(keyboard, allMovies,currentGenreIndex, currentMovieIndex);
-                break;
-            case "x":
-                System.out.println("Exiting navigation.");
-                break;
-
-            default:
-                System.out.println("Invalid choice. Please try again.");
-                break;
-
+        if (movies.length == 0) {
+            System.out.println("There are no movie records for this genre");
+            return;
         }
 
+        while (true) {
+            System.out.println();
+            System.out.println("----------------------------");
+            System.out.println("Current " + movies[currentPosition].toString());
+            System.out.println();
+            System.out.println("Enter a negative number \"n\" to display |n|-1 movie records above the current movie record displayed");
+            System.out.println();
+            System.out.println("Enter a positive number \"n\" to display |n|-1 movie records below the current movie record displayed");
+            System.out.println();
+            System.out.println("Enter 0 to go back to the main menu");
+            System.out.println();
 
-        } while (!userChoice.equalsIgnoreCase("x"));
+            int n = scanner.nextInt();
+            scanner.nextLine(); // Consume newline left-over
 
-
-    }
-
-    private static int selectGenre(Scanner keyboard, Movie[][] allMovies){
-        int genreIndex=0;
-
-        do{
-            System.out.println("------------------------------");
-            System.out.println("Genre Sub-Menu");
-            System.out.println("------------------------------");
-
-            for (int i = 0; i < allMovies.length; i++) {
-                System.out.println((i + 1) + ": " + allMovies[i][0].getGenres() + " (" + allMovies[i].length + " movies)");
+            if (n == 0) {
+                break; // Exit the navigation session
             }
-            System.out.println((allMovies.length + 1) + ": Exit");
-            System.out.println("------------------------------");
-            System.out.print("Enter Your Choice: ");
-            int choice=keyboard.nextInt();
 
-            try{
-                genreIndex=choice-1;
-                if (genreIndex >= allMovies.length || genreIndex < 0) {
-                    throw new NumberFormatException();
+            if (n < 0) {
+                int recordsToDisplay = Math.abs(n) - 1;
+                int newCurrentPosition = Math.max(0, currentPosition - recordsToDisplay);
+                for (int i = currentPosition - 1; i >= newCurrentPosition; i--) {
+                    System.out.println("Movie " + (i+1) + ": " + movies[i].toString());
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid choice. Please enter a number between 1 and " + (allMovies.length));
-            }
-        } while (genreIndex < 0 || genreIndex >= allMovies.length);
-
-        return genreIndex;
-    }
-
-    private static int navigateGenre(Scanner keyboard, Movie[][] allMovies, int genreIndex,int currentIndex){
-        System.out.println("Navigating " + allMovies[genreIndex][0].getGenres() + " movies (" + allMovies[genreIndex].length + ")");
-        System.out.println("Enter your choice: ");
-        int newIndex = currentIndex;
-        int input=0;
-        do {
-            System.out.println("Current movie: " + allMovies[genreIndex][currentIndex]);
-            System.out.print("Enter number of movies to skip (negative to go back, 0 to exit): ");
-
-            try {
-                input = keyboard.nextInt();
-                newIndex = currentIndex + input;
-                if (newIndex < 0) {
-                    newIndex = 0;
-                    System.out.println("BOF has been reached.");
-                } else if (newIndex >= allMovies[genreIndex].length) {
-                    newIndex = allMovies[genreIndex].length - 1;
-                    System.out.println("EOF has been reached.");
-                } else {
-                    // Adjust current index and display movies
-                    for (int i = Math.max(0, newIndex - Math.abs(input)); i <= Math.min(allMovies[genreIndex].length - 1, newIndex); i++) {
-                        System.out.println("Movie " + (i + 1) + ": " + allMovies[genreIndex][i]);
-                    }
-                    currentIndex = newIndex; // Update the current index to the new index after navigation
+                currentPosition = newCurrentPosition;
+                System.out.println("BOF reached.");
+                System.out.println();
+            } else {
+                int recordsToDisplay = Math.abs(n) - 1;
+                int newCurrentPosition = Math.min(movies.length - 1, currentPosition + recordsToDisplay);
+                for (int i = currentPosition + 1; i <= newCurrentPosition; i++) {
+                    System.out.println("Movie " + i + ": " + movies[i].toString());
                 }
-
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid integer.");
+                currentPosition = newCurrentPosition;
+                System.out.println("EOF reached.");
+                System.out.println();
             }
-        }while( input!= 0);
-        return newIndex;
+        }
 
-
+        System.out.println("Viewing session ended. Returning to main menu.");
+        // Don't close the scanner if you're using it elsewhere in your program.
     }
 
 }

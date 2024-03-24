@@ -243,9 +243,9 @@ public class Movie implements Serializable {
      *
      * @return a string representation of this Movie
      */
-    @Override
-    public String toString() {
-        return "Movie{" +
+  //  @Override
+  public String toString() {
+        return "Movie details:{" +
                 "year=" + year +
                 ", title='" + title + '\'' +
                 ", duration=" + duration +
@@ -258,4 +258,6 @@ public class Movie implements Serializable {
                 ", actor3='" + actor3 + '\'' +
                 '}';
     }
+
+
 }
