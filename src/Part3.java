@@ -51,7 +51,7 @@ public class Part3 {
 
         while (true) {
             System.out.println();
-            System.out.println("----------------------------");
+            System.out.println("-----------------------------------------------------------------------------------------------------");
             System.out.println("Current " + movies[currentPosition].toString());
             System.out.println();
             System.out.println("Enter a negative number \"n\" to display |n|-1 movie records above the current movie record displayed");
