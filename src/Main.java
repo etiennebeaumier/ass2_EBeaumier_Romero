@@ -1,9 +1,42 @@
-import java.util.Scanner;
-
+/* -----------------------------------------------------
+         //Assignment 2
+         //Question: Main Class
+        // Written by: Étienne Beaumier, 40211362
+                       Romero FAUSTIN,   40234898
+         // -----------------------------------------------------
+*/
 /**
- * This is the main class for a movie management program that allows users to navigate
- * through different genres and movies serialized in binary files.
+ * Movie Records Management and Navigation System
+ * ==============================================
+ *
+ * This program is designed for the movie theater archive management. It caters to the needs of
+ * Mr. Filmbuff who, during the '90s, collected extensive data on movies which is currently stored
+ * in text files by year of release. The goal of the program is to:
+ *
+ * 1. Partition these records into new genre-based text files, ensuring all records are valid and
+ *    categorizing them accordingly.
+ * 2. Load arrays of movie records from each genre-based file and serialize them into binary files.
+ * 3. Deserialize the binary files into a 2D array of movie records, and provide an interactive
+ *    system for Mr. Filmbuff to navigate through these records.
+ *
+ * The system is robust, equipped to handle syntax and semantic errors in the records, and it
+ * provides an interactive navigation menu. With user-friendly prompts, the user can seamlessly
+ * browse through the genres and records, viewing details as they wish. This automation of the
+ * movie archive system is set to significantly ease the browsing and management of Mr. Filmbuff's
+ * extensive movie collection from the 1990s.
+ *
+ * Features include:
+ * - Validation and partitioning of movie data based on genres.
+ * - Serialization and deserialization of movie records for persistent storage.
+ * - Interactive navigation through the movie records, with the ability to display a range of records
+ *   based on user input.
+ *
+ * The program adheres to the object-oriented programming principles and exception handling to
+ * ensure a robust and error-free runtime experience.
+ *
  */
+
+import java.util.Scanner;
 public class Main {
     /**
      * The entry point of the program. Initializes the application and provides
