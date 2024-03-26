@@ -16,7 +16,7 @@ public class Part1 {
 
     /**
      * Processes the given manifest file to partition movie records based on their genre.
-     *If a movie record is invalid, it is written to a file named "bad_movie_records.txt".
+     * If a movie record is invalid, it is written to a file named "bad_movie_records.txt".
      *
      * @param manifest The path to the manifest file listing CSV files to be processed.
      */
@@ -133,52 +133,52 @@ public class Part1 {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (ExcessFieldsException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (MissingFieldsException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (BadTitleException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (BadNameException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (BadYearException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (BadDurationException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (BadGenreException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (BadRatingException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
                 } catch (BadScoreException e) {
                     badMovie.println(movie);
                     e.setLineNumber(lineNumber);
                     e.setFileName(line);
-                    badMovie.println(e.toString()+"\n");
+                    badMovie.println(e.toString() + "\n");
 
                 }
             }
