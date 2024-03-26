@@ -1,10 +1,11 @@
-/* -----------------------------------------------------
-         //Assignment 2
-         //Question: Part 2
-        // Written by: Étienne Beaumier, 40211362
-                       Romero FAUSTIN,   40234898
-         // -----------------------------------------------------
-*/
+// -----------------------------------------------------
+//Assignment 2
+//COMP 249
+// Written by: Étienne Beaumier, 40211362
+//             Romero FAUSTIN,   40234898
+// Due date: 2024/03/27
+// -----------------------------------------------------
+
 import Exceptions.ExcessFieldsException;
 import Exceptions.MissingFieldsException;
 import Exceptions.MissingQuotesException;
