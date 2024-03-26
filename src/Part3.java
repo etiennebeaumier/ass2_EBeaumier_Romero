@@ -1,9 +1,9 @@
 /* -----------------------------------------------------
          //Assignment 2
          //Question: Part 3
-        // Written by: Étienne Beaumier, 40211362
+         // Written by: Étienne Beaumier, 40211362
                        Romero FAUSTIN,   40234898
-         // -----------------------------------------------------
+// -----------------------------------------------------
 */
 import java.io.*;
 import java.util.Scanner;
@@ -105,22 +105,19 @@ public class Part3 {
                     System.out.println("Movie " + (i + 1) + ": " + movies[i].toString());
                 }
                 currentPosition = newCurrentPosition;
-                System.out.println("BOF reached.");
                 System.out.println();
             } else {
                 int recordsToDisplay = Math.abs(n) - 1;
                 int newCurrentPosition = Math.min(movies.length - 1, currentPosition + recordsToDisplay);
                 for (int i = currentPosition + 1; i <= newCurrentPosition; i++) {
-                    System.out.println("Movie " + i + ": " + movies[i].toString());
+                    System.out.println("Movie " + (i+1) + ": " + movies[i].toString());
                 }
                 currentPosition = newCurrentPosition;
-                System.out.println("EOF reached.");
                 System.out.println();
             }
         }
 
         System.out.println("Viewing session ended. Returning to main menu.");
-        // Don't close the scanner if you're using it elsewhere in your program.
     }
 
 }

@@ -1,3 +1,11 @@
+/* -----------------------------------------------------
+         //Assignment 2
+         //Question: Part 1,2 & 3
+        // Written by: Étienne Beaumier, 40211362
+                       Romero FAUSTIN,   40234898
+// -----------------------------------------------------
+*/
+
 import Exceptions.MissingQuotesException;
 
 public class CSVUtils {

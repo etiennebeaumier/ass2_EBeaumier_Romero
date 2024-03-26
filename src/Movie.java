@@ -1,8 +1,10 @@
+/* -----------------------------------------------------
+         //Assignment 2
+         //Question: Part 1,2 & 3
+        // Written by: Étienne Beaumier, 40211362
+                       Romero FAUSTIN,   40234898
 // -----------------------------------------------------
-// Assignment 2
-// Written by: Etienne Beaumier (40211362)
-// -----------------------------------------------------
-
+*/
 import java.io.Serializable;
 
 
@@ -245,18 +247,17 @@ public class Movie implements Serializable {
      */
   //  @Override
   public String toString() {
-        return "Movie details:{" +
-                "year=" + year +
-                ", title='" + title + '\'' +
-                ", duration=" + duration +
-                ", genres='" + genres + '\'' +
-                ", rating='" + rating + '\'' +
-                ", score=" + score +
-                ", director='" + director + '\'' +
-                ", actor1='" + actor1 + '\'' +
-                ", actor2='" + actor2 + '\'' +
-                ", actor3='" + actor3 + '\'' +
-                '}';
+        return "Movie details: \t" +
+                "year: " + year +
+                ", title: " + title +
+                ", duration: " + duration + " minutes " +
+                ", genres : " + genres +
+                ", rating : " + rating +
+                ", score : " + score +
+                ", director : " + director +
+                ", actor1 : " + actor1 +
+                ", actor2 : " + actor2 +
+                ", actor3 : " + actor3;
     }
 
 

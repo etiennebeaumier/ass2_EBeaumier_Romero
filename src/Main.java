@@ -3,8 +3,9 @@
          //Question: Main Class
         // Written by: Étienne Beaumier, 40211362
                        Romero FAUSTIN,   40234898
-         // -----------------------------------------------------
+// -----------------------------------------------------
 */
+
 /**
  * Movie Records Management and Navigation System
  * ==============================================
@@ -72,7 +73,7 @@ public class Main {
                 "Thriller"
         };
         // Welcome message for users
-        System.out.println("The creators of this program, Étienne and Romero, welcome you!");
+        System.out.println("The creators of this program, Étienne and Romero, welcome!");
 
         Scanner keyboard = new Scanner(System.in);
         int movieGenreIndex = 0;
@@ -93,8 +94,13 @@ public class Main {
             // Switch to handle user's choice
             switch (optionSelected.toLowerCase()) {
                 case "s":
-                    displaylist(genres, allMovies);
+                    displayList(genres, allMovies);
                     movieGenreIndex = keyboard.nextInt() - 1;
+                    keyboard.nextLine();
+                    if(movieGenreIndex < 0 || movieGenreIndex >= genres.length) {
+                        System.out.println("Invalid choice. Please try again.");
+                        movieGenreIndex = 0;
+                    }
                     System.out.println();
                     break;
                 case "n":
@@ -105,7 +111,7 @@ public class Main {
                     System.out.println();
                     break;
                 case "x":
-                    System.out.println("Thank You for Using our program :)");
+                    System.out.println("Thank You for Using our program! Goodbye!");
                     break;
 
                 default:
@@ -129,7 +135,7 @@ public class Main {
      * @param genres    The array containing the names of the genres.
      * @param allMovies A 2D array containing movie records, categorized by genre.
      */
-    private static void displaylist(String[] genres, Movie[][] allMovies) {
+    private static void displayList(String[] genres, Movie[][] allMovies) {
         System.out.println();
         System.out.println("------------------------------");
         System.out.println("Genre Sub-Menu");
